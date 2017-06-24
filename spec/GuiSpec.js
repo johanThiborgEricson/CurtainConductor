@@ -27,4 +27,17 @@ describe("The gui", function() {
     expect(container.firstChild).toBe(gui.element);
   });
   
+  it("can compute the position of the curtain", function() {
+    var metronome = new ClockMetronome();
+    spyOn(metronome, "getPhase").and.returnValue("phase");
+    var conductor = new CosConductor();
+    spyOn(conductor, "getPosition").and.returnValue("position");
+    var gui = new Gui(metronome, conductor);
+    
+    var result = gui.computePosition();
+    
+    expect(conductor.getPosition).toHaveBeenCalledWith("phase");
+    expect(result).toBe("position");
+  });
+  
 });

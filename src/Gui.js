@@ -1,4 +1,6 @@
-function Gui() {
+function Gui(metronome, conductor) {
+  this.metronome = metronome;
+  this.conductor = conductor;
   this.canvas = document.createElement("canvas");
   this.ctx = this.canvas.getContext("2d");
   this.ctx.fillStyle = "#bbb";
@@ -7,6 +9,12 @@ function Gui() {
   this.element = document.createElement("div");
   this.element.appendChild(this.canvas);
 }
+
+Gui.prototype
+.computePosition = function() {
+  var phase = this.metronome.getPhase();
+  return this.conductor.getPosition(phase);
+};
 
 Gui.prototype
 .setCurtainPos = function(fraction) {
