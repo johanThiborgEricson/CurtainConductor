@@ -54,7 +54,7 @@ describe("The Whistleblower", function() {
       loadingDocument.body = document.createElement("div");
       
       var load = new Event("load");
-      loadingDocument.dispatchEvent(load);
+      eventTarget.dispatchEvent(load);
       
       expect(loadingDocument.body.firstChild.innerHTML).toBe("the message");
     });

@@ -1,5 +1,6 @@
 function Whistleblower(theWindow, theDocument) {
   theWindow.addEventListener("error", this);
+  this.myWindow = theWindow;
   this.myDocument = theDocument;
 }
 
@@ -11,7 +12,7 @@ Whistleblower.prototype
     this.myDocument.body.appendChild(errorMessage);
   } else {
     var that = this;
-    this.myDocument.addEventListener("load", function() {
+    this.myWindow.addEventListener("load", function() {
       that.myDocument.body.appendChild(errorMessage);
     });
   }
