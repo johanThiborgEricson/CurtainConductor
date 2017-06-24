@@ -14,9 +14,9 @@ Gui.prototype
   var w = this.canvas.width;
     
   this.ctx.fillStyle = "#000";
-  this.ctx.fillRect(0, 0, w, 0.3*h);
+  this.ctx.fillRect(0, 0, w, fraction*h);
   this.ctx.fillStyle = "#fff";
-  this.ctx.fillRect(0, 0.3*h, w, 0.7*h);
+  this.ctx.fillRect(0, fraction*h, w, (1-fraction)*h);
 };
 
 Gui.prototype
