@@ -6,20 +6,16 @@ function Whistleblower(theWindow, theDocument) {
 
 Whistleblower.prototype
 .handleEvent = function(e) {
-  var errorMessage = document.createElement("p");
-  errorMessage.innerHTML = e.toString();
-  if(this.myDocument.body){
-    this.printError(errorMessage);
-  } else {
-    var that = this;
-    this.myWindow.addEventListener("load", function() {
-      that.printError(errorMessage);
-    });
+  if(e.type == "error") {
+    var errorMessage = document.createElement("p");
+    errorMessage.innerHTML = e.toString();
+    this.errorMessage = errorMessage;
   }
-};
-
-Whistleblower.prototype
-.printError = function(errorMessage) {
+  
   var body = this.myDocument.body;
-  body.insertBefore(errorMessage, body.firstChild);
+  if(body){
+    body.insertBefore(this.errorMessage, body.firstChild);
+  } else {
+    this.myWindow.addEventListener("load", this);
+  }
 };
