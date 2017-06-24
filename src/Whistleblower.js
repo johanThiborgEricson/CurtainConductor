@@ -9,11 +9,17 @@ Whistleblower.prototype
   var errorMessage = document.createElement("p");
   errorMessage.innerHTML = e.toString();
   if(this.myDocument.body){
-    this.myDocument.body.appendChild(errorMessage);
+    this.printError(errorMessage);
   } else {
     var that = this;
     this.myWindow.addEventListener("load", function() {
-      that.myDocument.body.appendChild(errorMessage);
+      that.printError(errorMessage);
     });
   }
+};
+
+Whistleblower.prototype
+.printError = function(errorMessage) {
+  var body = this.myDocument.body;
+  body.insertBefore(errorMessage, body.firstChild);
 };

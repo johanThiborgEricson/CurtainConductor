@@ -59,6 +59,22 @@ describe("The Whistleblower", function() {
       expect(loadingDocument.body.firstChild.innerHTML).toBe("the message");
     });
     
+    it("displays them on the top of the page", function() {
+      var theDocument = {
+        body: document.createElement("div")
+      };
+      
+      theDocument.body.appendChild(document.createElement("br"));
+      var errorPhrase = document.createElement("p");
+      spyOn(document, "createElement").and.returnValue(errorPhrase);
+      var whistleblower = new Whistleblower(eventTarget, theDocument);
+      var error = new Event("error");
+      
+      whistleblower.handleEvent(error);
+      
+      expect(theDocument.body.firstChild).toBe(errorPhrase);
+    });
+    
   });
   
 });
