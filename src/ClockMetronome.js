@@ -31,3 +31,8 @@ ClockMetronome.prototype
   var beatFraction = currentBeatElapcedTimeInMs * beatsPerMillisecond;
   return beatFraction;
 };
+
+ClockMetronome.prototype
+.handleEvent = function() {
+  this.bpm = Number(this.bpmInput.value);
+};

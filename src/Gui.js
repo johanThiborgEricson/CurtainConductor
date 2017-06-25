@@ -3,6 +3,13 @@ function Gui(metronome, conductor) {
   this.conductor = conductor;
   this.element = document.createElement("form");
   
+  this.bpmInput = document.createElement("input");
+  this.bpmInput.type = "number";
+  this.bpmInput.addEventListener("input", this.metronome);
+  
+  this.element.appendChild(this.bpmInput);
+  metronome.bpmInput = this.bpmInput;
+  
   this.startButton = document.createElement("input");
   this.startButton.type = "button";
   this.startButton.value = "Start";
@@ -21,6 +28,7 @@ function Gui(metronome, conductor) {
   });
   
   this.element.appendChild(this.stopButton);
+  
   this.element.appendChild(document.createElement("br"));
   
   this.canvas = document.createElement("canvas");
@@ -36,6 +44,7 @@ Gui.prototype
   container.appendChild(this.element);
 };
 
+// TODO: Protect from having multiple setIntervals running by calling stop first
 Gui.prototype
 .start = function(fps) {
   this.intervalID = setInterval(function(gui) {

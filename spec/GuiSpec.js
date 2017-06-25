@@ -1,6 +1,6 @@
 describe("The gui", function() {
   it("can set the position of the curtain", function() {
-    var gui = new Gui();
+    var gui = new Gui({});
     spyOn(gui.ctx, "fillRect");
     
     gui.setCurtainPos(0.3);
@@ -13,14 +13,14 @@ describe("The gui", function() {
   });
   
   it("has a curtain", function() {
-    var gui = new Gui();
+    var gui = new Gui({});
     
     expect(gui.element.children).toContain(gui.canvas);
   });
   
   it("can attach itself", function() {
     var container = document.createElement("div");
-    var gui = new Gui();
+    var gui = new Gui({});
     
     gui.attachTo(container);
     
@@ -41,7 +41,7 @@ describe("The gui", function() {
   });
   
   it("can start the curtain", function(done) {
-    var gui = new Gui();
+    var gui = new Gui({});
     spyOn(gui, "computePosition").and.returnValue("computed");
     gui.setCurtainPos = function(fraction) {
       expect(gui.computePosition).toHaveBeenCalled();
@@ -54,7 +54,7 @@ describe("The gui", function() {
   });
   
   it("has a button that can start the curtain", function() {
-    var gui = new Gui();
+    var gui = new Gui({});
     spyOn(gui, "start");
     
     var clickEvent = new Event("click");
@@ -65,7 +65,7 @@ describe("The gui", function() {
   });
   
   it("has a button that can stop the curtain", function() {
-    var gui = new Gui();
+    var gui = new Gui({});
     spyOn(gui, "computePosition");
     spyOn(gui, "setCurtainPos");
     spyOn(window, "clearInterval").and.callThrough();
@@ -78,6 +78,21 @@ describe("The gui", function() {
     expect(gui.element.children).toContain(gui.stopButton);
     expect(gui.intervalID).toBeDefined();
     expect(clearInterval).toHaveBeenCalledWith(gui.intervalID);
+  });
+  
+  it("has a number input field that can change the bpm", function() {
+    var metronome = new ClockMetronome();
+    var gui = new Gui(metronome);
+    expect(gui.bpmInput).toBeDefined();
+    expect(gui.element.children).toContain(gui.bpmInput);
+    spyOn(gui.metronome, "handleEvent").and.callThrough();
+    
+    expect(gui.metronome.bpm).toBe(60);
+    gui.bpmInput.value = 100;
+    gui.bpmInput.dispatchEvent(new Event("input"));
+    
+    expect(gui.metronome.handleEvent).toHaveBeenCalled();
+    expect(gui.metronome.bpm).toBe(100);
   });
   
 });
