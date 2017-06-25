@@ -11,6 +11,14 @@ function Gui(metronome, conductor) {
 }
 
 Gui.prototype
+.start = function(fps) {
+  setInterval(function(gui) {
+    var position = gui.computePosition();
+    gui.setCurtainPos(position);
+  }, 1000/fps, this);
+};
+
+Gui.prototype
 .computePosition = function() {
   var phase = this.metronome.getPhase();
   return this.conductor.getPosition(phase);

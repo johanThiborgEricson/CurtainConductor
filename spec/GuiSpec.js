@@ -40,4 +40,16 @@ describe("The gui", function() {
     expect(result).toBe("position");
   });
   
+  it("can start the curtain", function(done) {
+    var gui = new Gui();
+    spyOn(gui, "computePosition").and.returnValue("computed");
+    gui.setCurtainPos = function(fraction) {
+      expect(gui.computePosition).toHaveBeenCalled();
+      expect(fraction).toBe("computed");
+      done();
+    };
+    
+    gui.start(60);
+  });
+  
 });
