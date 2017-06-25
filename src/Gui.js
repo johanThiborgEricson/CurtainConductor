@@ -21,6 +21,7 @@ function Gui(metronome, conductor) {
   });
   
   this.element.appendChild(this.stopButton);
+  this.element.appendChild(document.createElement("br"));
   
   this.canvas = document.createElement("canvas");
   this.ctx = this.canvas.getContext("2d");
