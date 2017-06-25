@@ -14,6 +14,7 @@ function Gui(metronome, conductor) {
   this.bpmInput.addEventListener("input", this.metronome);
   this.element.appendChild(this.bpmInput);
   this.metronome.bpmInput = this.bpmInput;
+  this.metronome.handleEvent();
   // TODO: Call metronome.handleEvent to initially sync with gui
   
   var snapLabel = document.createElement("label");
@@ -25,6 +26,7 @@ function Gui(metronome, conductor) {
   this.snapInput.addEventListener("input", this.conductor);
   this.element.appendChild(this.snapInput);
   this.conductor.snapInput = this.snapInput;
+  this.conductor.handleEvent();
   
   this.startButton = this.createStartButton();
   this.element.appendChild(this.startButton);
