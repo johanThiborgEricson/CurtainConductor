@@ -13,8 +13,18 @@ function Gui(metronome, conductor) {
   this.bpmInput = this.createBpmInput();
   this.bpmInput.addEventListener("input", this.metronome);
   this.element.appendChild(this.bpmInput);
-  metronome.bpmInput = this.bpmInput;
+  this.metronome.bpmInput = this.bpmInput;
   // TODO: Call metronome.handleEvent to initially sync with gui
+  
+  var snapLabel = document.createElement("label");
+  snapLabel["for"] = "snap";
+  snapLabel.innerHTML = "Snappiness: ";
+  this.element.appendChild(snapLabel);
+  
+  this.snapInput = this.createSnapInput();
+  this.snapInput.addEventListener("input", this.conductor);
+  this.element.appendChild(this.snapInput);
+  this.conductor.snapInput = this.snapInput;
   
   this.startButton = this.createStartButton();
   this.element.appendChild(this.startButton);
@@ -39,6 +49,17 @@ Gui.prototype
   // The Nyquist frequency
   bpmInput.max = 60*60/2;
   return bpmInput;
+};
+
+Gui.prototype
+.createSnapInput = function() {
+  var snapInput = document.createElement("input");
+  snapInput.id = "snap";
+  snapInput.type = "number";
+  snapInput.value = "10";
+  snapInput.min = "1";
+  snapInput.max = "99";
+  return snapInput;
 };
 
 Gui.prototype
