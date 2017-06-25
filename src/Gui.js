@@ -13,6 +13,15 @@ function Gui(metronome, conductor) {
   
   this.element.appendChild(this.startButton);
   
+  this.stopButton = document.createElement("input");
+  this.stopButton.type = "button";
+  this.stopButton.value = "Stop";
+  this.stopButton.addEventListener("click", function() {
+    that.stop();
+  });
+  
+  this.element.appendChild(this.stopButton);
+  
   this.canvas = document.createElement("canvas");
   this.ctx = this.canvas.getContext("2d");
   this.ctx.fillStyle = "#bbb";
@@ -22,8 +31,13 @@ function Gui(metronome, conductor) {
 }
 
 Gui.prototype
+.attachTo = function(container) {
+  container.appendChild(this.element);
+};
+
+Gui.prototype
 .start = function(fps) {
-  setInterval(function(gui) {
+  this.intervalID = setInterval(function(gui) {
     var position = gui.computePosition();
     gui.setCurtainPos(position);
   }, 1000/fps, this);
@@ -47,6 +61,6 @@ Gui.prototype
 };
 
 Gui.prototype
-.attachTo = function(container) {
-  container.appendChild(this.element);
+.stop = function() {
+  clearInterval(this.intervalID);
 };

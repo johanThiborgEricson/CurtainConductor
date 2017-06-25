@@ -46,6 +46,7 @@ describe("The gui", function() {
     gui.setCurtainPos = function(fraction) {
       expect(gui.computePosition).toHaveBeenCalled();
       expect(fraction).toBe("computed");
+      gui.stop();
       done();
     };
     
@@ -61,6 +62,22 @@ describe("The gui", function() {
     
     expect(gui.start).toHaveBeenCalledWith(60);
     expect(gui.element.children).toContain(gui.startButton);
+  });
+  
+  it("has a button that can stop the curtain", function() {
+    var gui = new Gui();
+    spyOn(gui, "computePosition");
+    spyOn(gui, "setCurtainPos");
+    spyOn(window, "clearInterval").and.callThrough();
+
+    gui.start(1);
+    var clickEvent = new Event("click");
+    gui.stopButton.dispatchEvent(clickEvent);
+    
+    expect(gui.stopButton).toBeDefined();
+    expect(gui.element.children).toContain(gui.stopButton);
+    expect(gui.intervalID).toBeDefined();
+    expect(clearInterval).toHaveBeenCalledWith(gui.intervalID);
   });
   
 });
