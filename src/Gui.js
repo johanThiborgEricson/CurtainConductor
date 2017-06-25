@@ -1,53 +1,83 @@
 function Gui(metronome, conductor) {
+  var that = this;
   this.metronome = metronome;
   this.conductor = conductor;
   this.element = document.createElement("form");
+
   
   var bpmLabel = document.createElement("label");
   bpmLabel["for"] = "bpm";
   bpmLabel.innerHTML = "bpm: ";
   this.element.appendChild(bpmLabel);
-  this.bpmInput = document.createElement("input");
-  this.bpmInput.id = "bpm";
-  this.bpmInput.type = "number";
-  this.bpmInput.value = "60";
-  this.bpmInput.min = "1";
-  // The Nyquist frequency
-  this.bpmInput.max = 60*60/2;
-  this.bpmInput.addEventListener("input", this.metronome);
   
+  this.bpmInput = this.createBpmInput();
+  this.bpmInput.addEventListener("input", this.metronome);
   this.element.appendChild(this.bpmInput);
   metronome.bpmInput = this.bpmInput;
   // TODO: Call metronome.handleEvent to initially sync with gui
   
-  this.startButton = document.createElement("input");
-  this.startButton.type = "button";
-  this.startButton.value = "Start";
-  var that = this;
-  this.startButton.addEventListener("click", function() {
-    that.start(60);
-  });
-  
+  this.startButton = this.createStartButton();
   this.element.appendChild(this.startButton);
   
-  this.stopButton = document.createElement("input");
-  this.stopButton.type = "button";
-  this.stopButton.value = "Stop";
-  this.stopButton.addEventListener("click", function() {
-    that.stop();
-  });
-  
+  this.stopButton = this.createStopButton();
   this.element.appendChild(this.stopButton);
   
   this.element.appendChild(document.createElement("br"));
   
   this.canvas = document.createElement("canvas");
-  this.ctx = this.canvas.getContext("2d");
-  this.ctx.fillStyle = "#bbb";
-  this.ctx.font = '24px serif';
-  this.ctx.fillText("Curtain conductor", 10, 48, 300);
+  this.ctx = this.init2dContext(this.canvas);
   this.element.appendChild(this.canvas);
 }
+
+Gui.prototype
+.createBpmInput = function() {
+  var bpmInput = document.createElement("input");
+  bpmInput.id = "bpm";
+  bpmInput.type = "number";
+  bpmInput.value = "60";
+  bpmInput.min = "1";
+  // The Nyquist frequency
+  bpmInput.max = 60*60/2;
+  return bpmInput;
+};
+
+Gui.prototype
+.createStartButton = function() {
+  var startButton = document.createElement("input");
+  startButton = startButton;
+  startButton.type = "button";
+  startButton.value = "Start";
+  var that = this;
+  startButton.addEventListener("click", function() {
+    that.start(60);
+  });
+  
+  return startButton;
+};
+
+Gui.prototype
+.createStopButton = function () {
+  var stopButton = document.createElement("input");
+  stopButton = stopButton;
+  stopButton.type = "button";
+  stopButton.value = "Stop";
+  var that = this;
+  stopButton.addEventListener("click", function() {
+    that.stop();
+  });
+  
+  return stopButton;
+};
+
+Gui.prototype
+.init2dContext = function(canvas) {
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#bbb";
+  ctx.font = '24px serif';
+  ctx.fillText("Curtain conductor", 10, 48, 300);
+  
+  return ctx;
+};
 
 Gui.prototype
 .attachTo = function(container) {
