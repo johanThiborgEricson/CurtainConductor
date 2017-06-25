@@ -52,4 +52,15 @@ describe("The gui", function() {
     gui.start(60);
   });
   
+  it("has a button that can start the curtain", function() {
+    var gui = new Gui();
+    spyOn(gui, "start");
+    
+    var clickEvent = new Event("click");
+    gui.startButton.dispatchEvent(clickEvent);
+    
+    expect(gui.start).toHaveBeenCalledWith(60);
+    expect(gui.element.children).toContain(gui.startButton);
+  });
+  
 });

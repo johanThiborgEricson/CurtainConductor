@@ -1,3 +1,6 @@
 window.addEventListener("load", function() {
-  (new Gui()).attachTo(document.body);
+  var metronome = new ClockMetronome(Date);
+  var conductor = new CosConductor();
+  var gui = new Gui(metronome, conductor);
+  gui.attachTo(document.body);
 });

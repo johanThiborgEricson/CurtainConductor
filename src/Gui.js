@@ -1,12 +1,23 @@
 function Gui(metronome, conductor) {
   this.metronome = metronome;
   this.conductor = conductor;
+  this.element = document.createElement("form");
+  
+  this.startButton = document.createElement("input");
+  this.startButton.type = "button";
+  this.startButton.value = "Start";
+  var that = this;
+  this.startButton.addEventListener("click", function() {
+    that.start(60);
+  });
+  
+  this.element.appendChild(this.startButton);
+  
   this.canvas = document.createElement("canvas");
   this.ctx = this.canvas.getContext("2d");
   this.ctx.fillStyle = "#bbb";
   this.ctx.font = '24px serif';
   this.ctx.fillText("Curtain conductor", 10, 48, 300);
-  this.element = document.createElement("div");
   this.element.appendChild(this.canvas);
 }
 
