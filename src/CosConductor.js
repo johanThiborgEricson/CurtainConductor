@@ -3,6 +3,6 @@ function CosConductor() {
 }
 
 CosConductor.prototype
-.getPosition = function() {
-  
+.getPosition = function(phase) {
+  return Math.cos(phase*2*Math.PI);
 };
