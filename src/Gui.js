@@ -3,12 +3,22 @@ function Gui(metronome, conductor) {
   this.conductor = conductor;
   this.element = document.createElement("form");
   
+  var bpmLabel = document.createElement("label");
+  bpmLabel["for"] = "bpm";
+  bpmLabel.innerHTML = "bpm: ";
+  this.element.appendChild(bpmLabel);
   this.bpmInput = document.createElement("input");
+  this.bpmInput.id = "bpm";
   this.bpmInput.type = "number";
+  this.bpmInput.value = "60";
+  this.bpmInput.min = "1";
+  // The Nyquist frequency
+  this.bpmInput.max = 60*60/2;
   this.bpmInput.addEventListener("input", this.metronome);
   
   this.element.appendChild(this.bpmInput);
   metronome.bpmInput = this.bpmInput;
+  // TODO: Call metronome.handleEvent to initially sync with gui
   
   this.startButton = document.createElement("input");
   this.startButton.type = "button";
