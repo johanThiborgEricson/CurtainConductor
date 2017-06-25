@@ -4,5 +4,5 @@ function CosConductor() {
 
 CosConductor.prototype
 .getPosition = function(phase) {
-  return Math.cos(phase*2*Math.PI);
+  return (1+Math.cos(phase*2*Math.PI))/2;
 };
