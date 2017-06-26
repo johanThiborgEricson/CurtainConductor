@@ -110,6 +110,10 @@ Gui.prototype
 // TODO: Protect from having multiple setIntervals running by calling stop first
 Gui.prototype
 .start = function(fps) {
+  if(this.intervalID) {
+    this.stop();
+  }
+  
   this.intervalID = setInterval(function(gui) {
     var position = gui.computePosition();
     gui.setCurtainPos(position);

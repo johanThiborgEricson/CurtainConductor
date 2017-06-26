@@ -122,4 +122,19 @@ describe("The gui", function() {
     expect(gui.conductor.snappiness).toBe(2);
   });
   
+  it("stops the currently moving curtain before trying to start it aganin",
+  function() {
+    var gui = new Gui(metronome, conductor);
+    spyOn(gui, "stop").and.callThrough();
+    
+    gui.start(0.4);
+    var intervalID = gui.intervalID;
+    expect(gui.stop).not.toHaveBeenCalled();
+    gui.start(0.4);
+    expect(gui.stop).toHaveBeenCalled();
+    
+    gui.stop();
+    clearInterval(intervalID);
+  });
+  
 });
