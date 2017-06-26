@@ -107,7 +107,6 @@ Gui.prototype
   container.appendChild(this.element);
 };
 
-// TODO: Protect from having multiple setIntervals running by calling stop first
 Gui.prototype
 .start = function(fps) {
   if(this.intervalID) {
