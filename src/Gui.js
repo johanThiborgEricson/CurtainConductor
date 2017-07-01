@@ -7,7 +7,7 @@ function Gui(metronome, conductor) {
   
   var bpmLabel = document.createElement("label");
   bpmLabel["for"] = "bpm";
-  bpmLabel.innerHTML = "bpm: ";
+  bpmLabel.innerHTML = "bpm:";
   this.element.appendChild(bpmLabel);
   
   this.bpmInput = this.createBpmInput();
@@ -19,7 +19,7 @@ function Gui(metronome, conductor) {
   
   var snapLabel = document.createElement("label");
   snapLabel["for"] = "snap";
-  snapLabel.innerHTML = "Snappiness: ";
+  snapLabel.innerHTML = "Snappiness:";
   this.element.appendChild(snapLabel);
   
   this.snapInput = this.createSnapInput();
@@ -27,6 +27,8 @@ function Gui(metronome, conductor) {
   this.element.appendChild(this.snapInput);
   this.conductor.snapInput = this.snapInput;
   this.conductor.handleEvent();
+  
+  this.element.appendChild(document.createElement("br"));
   
   this.startButton = this.createStartButton();
   this.element.appendChild(this.startButton);
