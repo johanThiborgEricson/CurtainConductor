@@ -1,4 +1,3 @@
 Put start and stop button on same row. <br> works fine, they should get 
   attention on desktops too.
-Set inputs reference to the gui in its constructor.
-Remove ClockMetronome
+Set metronomes reference to the gui in its constructor.

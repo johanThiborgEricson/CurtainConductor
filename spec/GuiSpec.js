@@ -4,7 +4,7 @@ describe("The gui", function() {
   var conductor;
   
   beforeEach(function() {
-    metronome = new ClockMetronome();
+    metronome = new Metronome();
     spyOn(metronome, "handleEvent");
     conductor = new CosConductor();
     spyOn(conductor, "handleEvent");
@@ -39,7 +39,7 @@ describe("The gui", function() {
   });
   
   it("can compute the position of the curtain", function() {
-    var metronome = new ClockMetronome();
+    var metronome = new Metronome();
     spyOn(metronome, "getPhase").and.returnValue("phase");
     var conductor = new CosConductor();
     spyOn(conductor, "getPosition").and.returnValue("position");
@@ -92,7 +92,7 @@ describe("The gui", function() {
   });
   
   it("has a number input field that can change the bpm", function() {
-    var metronome = new ClockMetronome();
+    var metronome = new Metronome();
     var gui = new Gui(metronome, conductor);
     expect(gui.bpmInput).toBeDefined();
     expect(gui.element.children).toContain(gui.bpmInput);
