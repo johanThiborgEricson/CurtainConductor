@@ -1,3 +1,4 @@
 Put start and stop button on same row. <br> works fine, they should get 
   attention on desktops too.
 Set metronomes reference to the gui in its constructor.
+Snappiness -> distinctness
