@@ -2,6 +2,8 @@ function TrampolineConductor(snappiness) {
   this.snappiness = snappiness;
 }
 
+TrampolineConductor.prototype = new AbstractConductor();
+
 TrampolineConductor.prototype
 .getPosition = function(phase) {
   var position = Math.cos((4+Math.PI)*phase);
