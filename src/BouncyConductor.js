@@ -32,3 +32,8 @@ BouncyConductor.prototype
   
   return output;
 };
+
+BouncyConductor.prototype
+.handleEvent = function() {
+  this.snappiness = Number(this.snapInput.value);
+};

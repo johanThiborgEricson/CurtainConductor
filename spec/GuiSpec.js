@@ -6,7 +6,7 @@ describe("The gui", function() {
   beforeEach(function() {
     metronome = new Metronome();
     spyOn(metronome, "handleEvent");
-    conductor = new CosConductor();
+    conductor = new BouncyConductor();
     spyOn(conductor, "handleEvent");
   });
   
@@ -41,7 +41,7 @@ describe("The gui", function() {
   it("can compute the position of the curtain", function() {
     var metronome = new Metronome();
     spyOn(metronome, "getPhase").and.returnValue("phase");
-    var conductor = new CosConductor();
+    var conductor = new BouncyConductor();
     spyOn(conductor, "getPosition").and.returnValue("position");
     var gui = new Gui(metronome, conductor);
     
@@ -108,7 +108,7 @@ describe("The gui", function() {
   
   it("has a number input field that can change the snappiness of the " + 
   "conductor", function () {
-    var conductor = new CosConductor();
+    var conductor = new BouncyConductor();
     var gui = new Gui(metronome, conductor);
     expect(gui.snapInput).toBeDefined();
     expect(gui.element.children).toContain(gui.snapInput);

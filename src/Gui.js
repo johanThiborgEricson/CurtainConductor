@@ -3,7 +3,6 @@ function Gui(metronome, conductor) {
   this.metronome = metronome;
   this.conductor = conductor;
   this.element = document.createElement("form");
-
   
   var bpmLabel = document.createElement("label");
   bpmLabel["for"] = "bpm";
@@ -60,9 +59,9 @@ Gui.prototype
   var snapInput = document.createElement("input");
   snapInput.id = "snap";
   snapInput.type = "number";
-  snapInput.value = "10";
-  snapInput.min = "1";
-  snapInput.max = "99";
+  snapInput.value = "3";
+  snapInput.min = "0";
+  snapInput.max = "9";
   return snapInput;
 };
 
