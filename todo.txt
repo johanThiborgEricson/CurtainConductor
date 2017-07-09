@@ -5,3 +5,5 @@ Write test for handleEvent in AbstractConductor.
 See if the snappiness attribute can reside in the AbstractConductor super class.
 AbstractConductor testcase description is overly repetetive.
 Distort should assert its input to be a number.
+Make up the positive direction in the canvas.
+Stop should reset, not pause.

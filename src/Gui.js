@@ -59,7 +59,7 @@ Gui.prototype
   var snapInput = document.createElement("input");
   snapInput.id = "snap";
   snapInput.type = "number";
-  snapInput.value = "3";
+  snapInput.value = "5";
   snapInput.min = "0";
   snapInput.max = "9";
   return snapInput;
