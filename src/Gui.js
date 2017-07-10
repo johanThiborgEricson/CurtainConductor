@@ -35,11 +35,11 @@ function Gui(metronome, conductor) {
   this.stopButton = this.createStopButton();
   this.element.appendChild(this.stopButton);
   
-  this.element.appendChild(document.createElement("br"));
-  
   this.canvas = document.createElement("canvas");
-  this.ctx = this.init2dContext(this.canvas);
+  this.ctx = this.canvas.getContext("2d");
   this.element.appendChild(this.canvas);
+  this.setCurtainPos(1);
+  
 }
 
 Gui.prototype
@@ -94,16 +94,6 @@ Gui.prototype
 };
 
 Gui.prototype
-.init2dContext = function(canvas) {
-  var ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#bbb";
-  ctx.font = '24px serif';
-  ctx.fillText("Curtain conductor", 10, 48, 300);
-  
-  return ctx;
-};
-
-Gui.prototype
 .attachTo = function(container) {
   container.appendChild(this.element);
 };
@@ -128,6 +118,8 @@ Gui.prototype
 
 Gui.prototype
 .setCurtainPos = function(fraction) {
+  this.canvas.height = window.innerHeight;
+  this.canvas.width = window.innerWidth;
   var h = this.canvas.height;
   var w = this.canvas.width;
     
